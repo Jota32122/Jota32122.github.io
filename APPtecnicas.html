@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inicio de Sesión</title>
+</head>
+<body>
+    <h1>Iniciar Sesión</h1>
+    <form id="loginForm">
+        Usuario: <input type="text" id="usuario"><br>
+        Contraseña: <input type="password" id="contrasena"><br>
+        <button type="button" onclick="mostrarFormulario()">Iniciar Sesión</button>
+    </form>
+
+    <div id="formulario" style="display: none;">
+        <h2>Formulario de Datos</h2>
+        <form id="userDataForm">
+            Nombre: <input type="text" id="nombre"><br>
+            Apellido: <input type="text" id="apellido"><br>
+            RUT: <input type="text" id="rut"><br>
+            Email: <input type="text" id="email"><br>
+            <button type="button" onclick="guardarDatos()">Guardar Datos</button>
+        </form>
+        <a href="mostrar.html">Mostrar Datos</a>
+    </div>
+
+    <script>
+        function mostrarFormulario() {
+            document.getElementById("formulario").style.display = "block";
+        }
+
+        function guardarDatos() {
+            const nombre = document.getElementById("nombre").value;
+            const apellido = document.getElementById("apellido").value;
+            const rut = document.getElementById("rut").value;
+            const email = document.getElementById("email").value;
+
+            const nombreValido = /^[A-Za-z]+$/.test(nombre);
+            const apellidoValido = /^[A-Za-z]+$/.test(apellido);
+
+            if (!nombreValido || !apellidoValido) {
+                alert("Nombre y Apellido deben contener solo letras.");
+                return;
+            }
+
+            
+            const userData = {
+                nombre: nombre,
+                apellido: apellido,
+                rut: rut,
+                email: email
+            };
+
+            // Almacena los datos en el almacenamiento local (puede cambiar esto por una solicitud al backend)
+            const datosGuardados = JSON.parse(localStorage.getItem("datosGuardados")) || [];
+            datosGuardados.push(userData);
+            localStorage.setItem("datosGuardados", JSON.stringify(datosGuardados));
+
+            alert("Datos guardados con éxito");
+        }
+    </script>
+</body>
+</html>
