@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mostrar Datos</title>
+</head>
+<body>
+    <h1>Datos Ingresados</h1>
+    <table>
+        <tr>
+            <th>Nombre</th>
+            <th>Apellido</th>
+            <th>RUT</th>
+            <th>Email</th>
+        </tr>
+        <!-- JavaScript para mostrar los datos -->
+        <script>
+            const datosGuardados = JSON.parse(localStorage.getItem("datosGuardados")) || [];
+
+            datosGuardados.forEach((userData) => {
+                document.write("<tr>");
+                document.write("<td>" + userData.nombre + "</td>");
+                document.write("<td>" + userData.apellido + "</td>");
+                document.write("<td>" + userData.rut + "</td>");
+                document.write("<td>" + userData.email + "</td>");
+                document.write("</tr>");
+            });
+        </script>
+    </table>
+    <a href="index.html">Volver al Inicio</a>
+</body>
+</html>
